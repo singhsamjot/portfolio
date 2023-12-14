@@ -2124,7 +2124,13 @@ noscript {
   /* Styles */
   .scroll-down {
     margin-left: 50%;
-    margin-top: -75px;
+    margin-top: -24px;
+  }
+  .about-section-container {
+    margin-top: 50px;
+  }
+  .text-content {
+    margin-top: -72px;
   }
 }
 
@@ -2135,10 +2141,20 @@ noscript {
     margin-left: 50%;
     margin-top: 0px;
   }
+  .about-section-container {
+    margin-top: 25px;
+  }
 }
-
 /* iPads (portrait and landscape) ----------- */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+@media only screen and (min-device-width: 768px) and (max-device-width: 850px) {
+  /* Styles */
+  .scroll-down {
+    margin-left: 50%;
+    margin-top: -220px;
+  }
+}
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 851px) and (max-device-width: 1024px) {
   /* Styles */
   .scroll-down {
     margin-left: 50%;
