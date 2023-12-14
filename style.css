@@ -1,16 +1,3 @@
-/* 
-██╗░░░██╗██╗███╗░░██╗░█████╗░██████╗░
-██║░░░██║██║████╗░██║██╔══██╗██╔══██╗
-╚██╗░██╔╝██║██╔██╗██║██║░░██║██║░░██║
-░╚████╔╝░██║██║╚████║██║░░██║██║░░██║
-░░╚██╔╝░░██║██║░╚███║╚█████╔╝██████╔╝
-░░░╚═╝░░░╚═╝╚═╝░░╚══╝░╚════╝░╚═════╝░
-░░░░░██╗░█████╗░███╗░░██╗░██████╗░██╗██████╗░
-░░░░░██║██╔══██╗████╗░██║██╔════╝░██║██╔══██╗
-░░░░░██║███████║██╔██╗██║██║░░██╗░██║██║░░██║
-██╗░░██║██╔══██║██║╚████║██║░░╚██╗██║██║░░██║
-╚█████╔╝██║░░██║██║░╚███║╚██████╔╝██║██████╔╝
-░╚════╝░╚═╝░░╚═╝╚═╝░░╚══╝░╚═════╝░╚═╝╚═════╝░ */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -2125,5 +2112,35 @@ noscript {
   }
   100% {
     opacity: 1;
+  }
+}
+
+@media screen and (min-width: 865px) {
+  .scroll-down {
+    margin-top: -72px !important;
+    margin-left: 50% !important;
+  }
+}
+@media screen and (min-width: 866px) {
+  .scroll-down {
+    margin-top: -50px !important;
+    margin-left: 50% !important;
+  }
+}
+@media screen and (min-width: 992px) {
+  .scroll-down {
+    margin-top: 0px !important;
+    margin-left: 50% !important;
+  }
+}
+@media screen and (min-width: 1400px) {
+  .contact-btn-div {
+    margin-top: -100px;
+  }
+}
+@media screen and (min-width: 600px) {
+  .scroll-down {
+    margin-left: 50% !important;
+    margin-top: -75px !important;
   }
 }
