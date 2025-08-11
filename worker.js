@@ -38,9 +38,18 @@ export default {
       return new Response(JSON.stringify({ reply: 'Sorry, the AI service is unavailable.' }), { headers: { 'content-type': 'application/json' }, status: 200 });
     }
 
-    const data = await resp.json();
-    const reply = data.choices?.[0]?.message?.content || 'Thanks for asking!';
-    return new Response(JSON.stringify({ reply }), { headers: { 'content-type': 'application/json' } });
+    // Stream back as Server-Sent Events
+    const { readable, writable } = new TransformStream();
+    const writer = writable.getWriter();
+    const encoder = new TextEncoder();
+    try {
+      const data = await resp.json();
+      const reply = data.choices?.[0]?.message?.content || 'Thanks for asking!';
+      await writer.write(encoder.encode(`data: ${JSON.stringify({ reply })}\n\n`));
+    } finally {
+      await writer.close();
+    }
+    return new Response(readable, { headers: { 'content-type': 'text/event-stream' } });
   }
 };
 

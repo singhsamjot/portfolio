@@ -359,13 +359,38 @@ document.addEventListener("DOMContentLoaded", () => {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ prompt: q })
       });
-      const data = await res.json();
-      let reply = data.reply || localAnswer(q);
-      if (reply === lastReply) reply = reply + " Anything else you’d like to know?";
-      lastReply = reply;
-      typing.remove();
-      append(reply, "bot");
-      saveMessage(reply, 'bot');
+      if (res.headers.get('content-type')?.includes('text/event-stream')) {
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+        let finalText = '';
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const parts = buffer.split('\n\n');
+          buffer = parts.pop();
+          for (const p of parts) {
+            const m = p.replace(/^data: /, '');
+            try {
+              const obj = JSON.parse(m);
+              finalText = obj.reply || finalText;
+            } catch {}
+          }
+        }
+        typing.remove();
+        const reply = finalText || localAnswer(q);
+        append(reply, 'bot');
+        saveMessage(reply, 'bot');
+      } else {
+        const data = await res.json();
+        let reply = data.reply || localAnswer(q);
+        if (reply === lastReply) reply = reply + " Anything else you’d like to know?";
+        lastReply = reply;
+        typing.remove();
+        append(reply, "bot");
+        saveMessage(reply, 'bot');
+      }
     } catch (err) {
       typing.remove();
       const reply = localAnswer(q);
@@ -450,6 +475,23 @@ document.addEventListener('mousemove', (e) => {
   orbs.forEach((o, i) => {
     const depth = (i + 1) * 6; // slower for deeper
     o.style.transform = `translate3d(${x * depth}px, ${y * depth}px, 0)`;
+  });
+});
+
+// 3D tilt effect for cards
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.tilt');
+  cards.forEach((card) => {
+    const strength = 10;
+    const onMove = (e) => {
+      const rect = card.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width - 0.5;
+      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `rotateY(${px * strength}deg) rotateX(${ -py * strength}deg)`;
+    };
+    const reset = () => { card.style.transform = 'none'; };
+    card.addEventListener('mousemove', onMove);
+    card.addEventListener('mouseleave', reset);
   });
 });
 
