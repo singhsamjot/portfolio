@@ -32,6 +32,7 @@
     <meta name="twitter:card" content="" > -->
     <title>Samjot Singh | Portfolio</title>
     <link rel="icon" type="image/x-icon" href="src/jpg/profile-pic (3).png" />
+    <link rel="manifest" href="manifest.webmanifest" />
     <!-- aos cdn -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!-- stylesheet -->
@@ -803,6 +804,12 @@
             });
           }
         }
+      });
+    }
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
       });
     }
   </script>
