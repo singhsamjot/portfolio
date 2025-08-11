@@ -453,6 +453,26 @@ document.addEventListener('mousemove', (e) => {
   });
 });
 
+// Smooth anchor transitions with fade overlay
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a[href^="#"]');
+  if (!link) return;
+  const href = link.getAttribute('href');
+  const el = document.querySelector(href);
+  if (!el) return;
+  e.preventDefault();
+  const overlay = document.querySelector('.page-fade-overlay');
+  if (overlay) {
+    document.body.classList.add('fade-active');
+    setTimeout(() => {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => document.body.classList.remove('fade-active'), 350);
+    }, 50);
+  } else {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+});
+
 // Reveal progress bars on scroll
 document.addEventListener('DOMContentLoaded', () => {
   const bars = document.querySelectorAll('.bar-fill');

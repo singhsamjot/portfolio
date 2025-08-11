@@ -70,6 +70,10 @@ body {
   cursor: url("cursorr.png") 10 12;
 }
 
+/* Page fade overlay */
+.page-fade-overlay { position: fixed; inset: 0; pointer-events: none; background: rgba(0,0,0,0.4); opacity: 0; transition: opacity .35s ease; z-index: 9990; }
+body.fade-active .page-fade-overlay { opacity: 1; }
+
 /* Floating gradient orbs */
 .hero-bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
 .orb { position: absolute; width: 40vw; height: 40vw; min-width: 320px; min-height: 320px; filter: blur(60px); opacity: .35; border-radius: 50%; mix-blend-mode: screen; }
