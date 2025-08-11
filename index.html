@@ -45,6 +45,11 @@
       crossorigin="anonymous"
     />
 
+    <!-- Inter Variable font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Passions+Conflict&family=Orbitron&family=Fira+Code&family=Six+Caps"
@@ -54,6 +59,8 @@
       .accent-picker { display:flex; gap:10px; align-items:center; margin-left:12px; }
       .accent-swatch { width:20px; height:20px; border-radius:50%; border:2px solid rgba(255,255,255,0.3); cursor:pointer; }
       .accent-swatch[aria-checked="true"] { outline: 2px solid #fff; }
+      .theme-presets { display:flex; gap:8px; margin-left:8px; }
+      .theme-preset { font-size:12px; background: rgba(255,255,255,0.06); color:#e5e7eb; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:6px 10px; cursor:pointer; }
     </style>
     <!-- google icons -->
     <link
@@ -73,6 +80,11 @@
           <button class="accent-swatch" style="background:#6bc5f8" aria-checked="false" aria-label="Blue" data-accent="#6bc5f8"></button>
           <button class="accent-swatch" style="background:#10b981" aria-checked="false" aria-label="Green" data-accent="#10b981"></button>
           <button class="accent-swatch" style="background:#f59e0b" aria-checked="false" aria-label="Amber" data-accent="#f59e0b"></button>
+          <div class="theme-presets" aria-label="Theme presets">
+            <button class="theme-preset" data-preset="neo">Neo</button>
+            <button class="theme-preset" data-preset="aurora">Aurora</button>
+            <button class="theme-preset" data-preset="midnight">Midnight</button>
+          </div>
         </div>
         <div class="logo" tabindex="0" aria-label="samjot logo">
           <div class="logo-top">
@@ -475,17 +487,17 @@
                 </div>
           <div class="highlights-grid">
             <div class="highlight-card tilt reveal-item">
-              <div class="h-badge">Performance</div>
+              <div class="h-badge"><i data-lucide="gauge"></i> Performance</div>
               <div class="h-metric">-45% LCP</div>
               <p>Reduced Largest Contentful Paint across key pages with code-splitting, image optimization and caching.</p>
                 </div>
             <div class="highlight-card tilt reveal-item">
-              <div class="h-badge">Delivery</div>
+              <div class="h-badge"><i data-lucide="rocket"></i> Delivery</div>
               <div class="h-metric">12+ apps</div>
               <p>Shipped and maintained full‑stack apps end‑to‑end with CI/CD, monitoring and clear hand‑offs.</p>
                 </div>
             <div class="highlight-card tilt reveal-item">
-              <div class="h-badge">Quality</div>
+              <div class="h-badge"><i data-lucide="check-circle"></i> Quality</div>
               <div class="h-metric">90%+ cov</div>
               <p>Established testing strategies (unit/e2e) that keep releases stable and easy to refactor.</p>
                 </div>
@@ -501,7 +513,7 @@
                 </div>
           <div class="services-grid">
             <div class="service-card tilt reveal-item">
-              <div class="service-title">Build</div>
+              <div class="service-title"><i data-lucide="hammer"></i> Build</div>
               <p>Design and implement responsive, accessible frontends and scalable APIs.</p>
               <ul>
                 <li>React/Next.js, Angular</li>
@@ -509,7 +521,7 @@
               </ul>
                 </div>
             <div class="service-card tilt reveal-item">
-              <div class="service-title">Optimize</div>
+              <div class="service-title"><i data-lucide="sparkle"></i> Optimize</div>
               <p>Performance audits and fixes to improve Core Web Vitals and user engagement.</p>
               <ul>
                 <li>Bundle/Render performance</li>
@@ -517,7 +529,7 @@
               </ul>
                 </div>
             <div class="service-card tilt reveal-item">
-              <div class="service-title">Integrate</div>
+              <div class="service-title"><i data-lucide="plug"></i> Integrate</div>
               <p>Secure integrations with auth, payments and third‑party services.</p>
               <ul>
                 <li>OAuth/JWT, Stripe</li>

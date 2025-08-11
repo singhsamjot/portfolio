@@ -444,6 +444,24 @@ document.addEventListener("DOMContentLoaded", () => {
         .forEach((b) => b.setAttribute("aria-checked", String(b === btn)));
     });
   });
+
+  // Theme presets
+  const setPreset = (name) => {
+    const root = document.documentElement;
+    if (name === 'neo') {
+      root.style.setProperty('--color-light-blue', '#80d4ff');
+      root.style.setProperty('--color-light-purple', '#a78bfa');
+    } else if (name === 'aurora') {
+      root.style.setProperty('--color-light-blue', '#6ee7b7');
+      root.style.setProperty('--color-light-purple', '#22d3ee');
+    } else if (name === 'midnight') {
+      root.style.setProperty('--color-light-blue', '#60a5fa');
+      root.style.setProperty('--color-light-purple', '#9333ea');
+    }
+  };
+  document.querySelectorAll('.theme-preset').forEach((b)=>{
+    b.addEventListener('click', ()=> setPreset(b.dataset.preset));
+  })
 });
 
 // Magnetic hover for CTA button
