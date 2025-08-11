@@ -99,13 +99,14 @@ body {
 .ai-sub { font-size:12px; opacity:.7; }
 .ai-close { background: transparent; border:none; color:#aaa; cursor:pointer; font-size:18px; }
 .ai-chat-log { max-height: 320px; overflow:auto; padding: 14px; display:flex; flex-direction:column; gap:10px; }
-.ai-chat-log .msg { padding:10px 12px; border-radius:12px; width: fit-content; max-width: 90%; font-size: 14px; line-height: 1.35; }
+.ai-chat-log .msg { padding:10px 12px; border-radius:12px; width: fit-content; max-width: 90%; font-size: 14px; line-height: 1.35; color:#f1f5f9; }
 .ai-chat-log .me { background: rgba(107,197,248,0.18); align-self: flex-end; border:1px solid rgba(107,197,248,0.35); }
 .ai-chat-log .bot { background: rgba(128,0,255,0.18); align-self: flex-start; border:1px solid rgba(128,0,255,0.35); }
 .ai-suggestions { display:flex; gap:8px; padding: 0 14px 8px; flex-wrap: wrap; }
 .ai-pill { background: rgba(255,255,255,0.06); color:#cfd3da; border:1px solid rgba(255,255,255,0.08); border-radius: 999px; padding:6px 10px; font-size:12px; cursor:pointer; }
 #ai-chat-form { display:flex; gap:10px; padding:12px 14px 14px; }
-#ai-chat-input { flex:1; border-radius:10px; border:1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); color:#fff; padding:12px 12px; font-size:14px; }
+#ai-chat-input { flex:1; border-radius:10px; border:1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); color:#fff; padding:12px 12px; font-size:14px; caret-color:#fff; }
+#ai-chat-input::placeholder { color:#9ca3af; }
 .ai-send { border-radius:10px; border:none; background: linear-gradient(135deg, #7c3aed, #9333ea); color:#fff; padding:12px 16px; cursor:pointer; font-weight:700; }
 .ai-send:hover { filter: brightness(1.05); }
 .ai-hint { padding: 6px 14px 12px; font-size: 12px; opacity: 0.7; }
@@ -827,12 +828,52 @@ noscript {
 /* Skill radar container */
 .skill-radar-container {
   width: 100%;
-  max-width: 520px;
-  margin: 30px 0 10px 0;
+  max-width: 640px;
+  height: 360px;
+  margin: 24px 0 24px 0;
 }
 canvas#skillRadar {
   width: 100% !important;
-  height: auto !important;
+  height: 100% !important;
+}
+
+/* Modern stacks grid */
+.stacks-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 20px 0 10px 0;
+}
+
+@media (max-width: 780px) {
+  .stacks-container { grid-template-columns: 1fr; }
+}
+
+.stack-card {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 14px;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(4px);
+}
+.stack-title {
+  font-weight: 700;
+  color: #d4d4d8;
+  margin-bottom: 10px;
+}
+.stack-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.badge {
+  font-size: 12px;
+  color: #e5e7eb;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: rgba(255,255,255,0.06);
 }
 .about-heading-article {
   font-size: 3rem;
