@@ -744,79 +744,47 @@ noscript {
 .letsTalkBtn:active .letsTalkBtn-BG {
   transform: translateY(-7px) translateX(-7px);
 }
-.resume-btn {
-  z-index: 9998;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 45px;
-  height: 45px;
+
+/* Quick Email Button Styles */
+.quick-email-btn {
+  text-decoration: none;
+  margin-left: 20px;
+  display: inline-block;
+}
+
+.quick-email {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
-  border-radius: 50%;
+  border-radius: 25px;
+  padding: 12px 24px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  overflow: hidden;
-  transition-duration: 0.3s;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
-  background: linear-gradient(
-    82.3deg,
-    rgba(150, 93, 233, 1) 10.8%,
-    rgba(99, 88, 238, 1) 94.3%
-  );
-}
-
-/* plus sign */
-.sign {
-  width: 100%;
-  transition-duration: 0.3s;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
-.sign svg {
-  width: 17px;
+.quick-email:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
 }
 
-.sign svg path {
-  fill: white;
-}
-/* text */
-.text {
-  position: absolute;
-  right: 0%;
-  width: 0%;
-  opacity: 0;
-  color: white;
-  font-size: 1em;
-  font-weight: 600;
-  transition-duration: 0.3s;
-}
-/* hover effect on button width */
-.resume-btn:hover {
-  width: 130px;
-  border-radius: 40px;
-  transition-duration: 0.3s;
+.quick-email:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
-.resume-btn:hover .sign {
-  width: 30%;
-  transition-duration: 0.3s;
-  padding-left: 20px;
+.quick-email svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
 }
-/* hover effect button's text */
-.resume-btn:hover .text {
-  opacity: 1;
-  width: 70%;
-  transition-duration: 0.3s;
-  padding-right: 10px;
-}
-/* button click effect*/
-.resume-btn:active {
-  transform: translate(2px, 2px);
-}
+
 /* landing page code ends here */
 
 /* about section starts from here */
@@ -1083,215 +1051,13 @@ noscript {
 
 /* skills section ends */
 /* ######################################################## */
-/* projects section starts */
-.projects-section-container {
-  margin: 150px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-.projects-section-div {
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.projects-heading {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.projects-heading-article {
-  font-size: 3rem;
-  font-family: fira code;
-  font-weight: 500;
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    right top,
-    from(#b0f3f1),
-    to(#ffcfdf)
-  );
-  background-image: -webkit-linear-gradient(left, #b0f3f1, #ffcfdf);
-  background-image: linear-gradient(90deg, #b0f3f1, #ffcfdf);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.projectsHeadingP {
-  width: 300px;
-  height: 1px;
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    right top,
-    from(#b0f3f1),
-    to(#ffcfdf)
-  );
-  background-image: -webkit-linear-gradient(left, #b0f3f1, #ffcfdf);
-  background-image: linear-gradient(90deg, #b0f3f1, #ffcfdf);
-}
-.project-boxes-div {
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 50px;
-  padding: 50px;
-}
-.project-boxes-div a {
-  text-decoration: none;
-  width: 100%;
-}
-.project-box {
-  background-color: rgba(255, 255, 255, 0.005);
-  width: 100%;
-  height: 400px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  transition-duration: 0.3s;
-  cursor: url("click.png");
-  cursor: url("click.png"), url("click.png");
-  cursor: url("click.png"), move;
-  cursor: url("click.png") 10 12;
-  position: relative;
-  box-shadow: 0px 10px 20px var(--color-shadowDark);
-}
-.language-gradient-class {
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.113);
-}
-.project-box:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradientforlanguage 5s ease infinite;
-  top: 0;
-  left: 0;
-}
-.info-div {
-  width: 50%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 20px;
-  padding: 0 40px;
-}
-.faviconforProject {
-  background-color: white;
-  width: 20px;
-  border-radius: 50%;
-}
-.faviconforProjectAquaregia {
-  width: 20px;
-}
-.image-div {
-  width: 50%;
-  height: 100%;
-  overflow: hidden;
-  padding-top: 70px;
-  padding-left: 10px;
-}
-.image-div img {
-  height: 100%;
-  /* border-top-left-radius:10px ; */
-}
-.ProjectHeading {
-  color: var(--color-white);
-  font-size: 3.4rem;
-  font-weight: 700;
-}
-.ProjectDescription {
-  color: gray;
-  font-size: 1.7rem;
-  font-weight: 400;
-}
-/* Project visit button */
-.cta {
-  position: relative;
-  padding: 12px 18px;
-  transition: all 0.2s ease;
-  border: none;
-  background: none;
-  cursor: url("click.png");
-  cursor: url("click.png"), url("click.png");
-  cursor: url("click.png"), move;
-  cursor: url("click.png") 10 12;
-}
 
-.cta:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  border-radius: 50px;
-  /* background: #b1dae7; */
-  background-color: var(--color-navbarBorder-dark);
-  width: 45px;
-  height: 45px;
-  transition: all 0.3s ease;
-}
 
-.cta span {
-  position: relative;
-  /* font-family: "Ubuntu", sans-serif; */
-  font-size: 1.8rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  /* color: #234567; */
-  color: var(--color-light-blue);
-}
 
-.cta svg {
-  position: relative;
-  top: 0;
-  margin-left: 10px;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  /* stroke: #234567; */
-  stroke: var(--color-light-blue);
-  stroke-width: 2;
-  transform: translateX(-5px);
-  transition: all 0.3s ease;
-}
 
-.cta:hover:before {
-  width: 100%;
-  /* background: #b1dae7; */
-}
-.cta:hover span {
-  color: white;
-}
-.cta:hover svg {
-  stroke: white;
-}
 
-.cta:hover svg {
-  transform: translateX(0);
-}
 
-.cta:active {
-  transform: scale(0.95);
-}
-/* Project visit button */
-.project-box:hover {
-  transform: translate(-5px, -10px);
-  transition-duration: 0.3s;
-}
 
-/* projects ends */
 
 /* for light mode  */
 .heading-article-light {
@@ -1519,9 +1285,6 @@ noscript {
   .skills-section {
     width: 80%;
   }
-  .projects-section-div {
-    width: 80%;
-  }
 }
 @media screen and (max-width: 1150px) {
   html {
@@ -1710,23 +1473,7 @@ noscript {
     left: -20px;
     border-radius: 50%;
   }
-  .projects-section-div {
-    width: 80%;
-  }
-  .project-box {
-    flex-direction: column;
-    height: 800px;
-  }
-  .info-div {
-    width: 100%;
-    height: 50%;
-  }
-  .image-div {
-    padding: 0;
-    width: 100%;
-    height: 50%;
-    padding-left: 80px;
-  }
+
 }
 
 @media screen and (max-width: 768px) {
@@ -1777,12 +1524,7 @@ noscript {
     width: 100%;
   }
 
-  .projects-section-div {
-    width: 80%;
-  }
-  .project-boxes-div {
-    padding: 40px 0;
-  }
+
 }
 
 @media screen and (max-width: 500px) {
@@ -1815,27 +1557,14 @@ noscript {
   .landing-page-container {
     height: 85vh;
   }
-  .project-box {
-    height: 550px;
-  }
-  .info-div {
-    height: 60%;
-  }
-  .image-div {
-    height: 40%;
-    padding-left: 50px;
-  }
-  .image-div img {
-    border-top-left-radius: 10px;
-  }
+
 }
 @media screen and (max-width: 430px) {
   html {
     font-size: 45%;
   }
   .skills-section,
-  .about-section,
-  .projects-section-div {
+  .about-section {
     width: 80%;
   }
   .info-div {
