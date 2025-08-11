@@ -243,6 +243,7 @@ window.addEventListener("resize", windowResize);
 document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.getElementById("ai-chat-toggle");
   const panel = document.getElementById("ai-chat-panel");
+  const closeBtn = document.querySelector('.ai-close');
   const form = document.getElementById("ai-chat-form");
   const input = document.getElementById("ai-chat-input");
   const log = document.querySelector(".ai-chat-log");
@@ -260,6 +261,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const expanded = toggle.getAttribute("aria-expanded") === "true";
     toggle.setAttribute("aria-expanded", String(!expanded));
     panel.hidden = expanded;
+  });
+  closeBtn && closeBtn.addEventListener('click', () => {
+    toggle.setAttribute('aria-expanded', 'false');
+    panel.hidden = true;
+  });
+
+  // Quick suggestion pills
+  document.querySelectorAll('.ai-pill').forEach((pill) => {
+    pill.addEventListener('click', () => {
+      input.value = pill.getAttribute('data-say') || pill.textContent;
+      input.focus();
+    });
   });
 
   const PROXY_URL = window.AI_PROXY_URL || ""; // Set window.AI_PROXY_URL to use your serverless proxy

@@ -131,13 +131,27 @@
     <main id="main">
       <!-- AI Chat Bubble -->
       <div id="ai-chat" aria-live="polite">
-        <button id="ai-chat-toggle" aria-expanded="false" aria-controls="ai-chat-panel" title="Ask me anything">💬</button>
+        <button id="ai-chat-toggle" aria-expanded="false" aria-controls="ai-chat-panel" title="Open Singh Bot">🤖</button>
         <div id="ai-chat-panel" hidden>
-          <div class="ai-chat-header">Ask me anything</div>
+          <div class="ai-chat-header">
+            <div class="ai-chat-title">
+              <span class="ai-avatar">S</span>
+              <div>
+                <div class="ai-name">Singh Bot</div>
+                <div class="ai-sub">Ask anything about my skills, experience and work</div>
+              </div>
+            </div>
+            <button class="ai-close" aria-label="Close chat" title="Close">✕</button>
+          </div>
           <div class="ai-chat-log" role="log" aria-label="Chat log"></div>
+          <div class="ai-suggestions" aria-label="Quick suggestions">
+            <button type="button" class="ai-pill" data-say="Give me a quick summary of your experience.">experience</button>
+            <button type="button" class="ai-pill" data-say="Summarize your core skills in 3 bullets.">summary</button>
+            <button type="button" class="ai-pill" data-say="How can I contact you?">contact</button>
+          </div>
           <form id="ai-chat-form">
-            <input id="ai-chat-input" type="text" placeholder="Ask about my skills, experience, projects..." aria-label="Your question" />
-            <button type="submit">Send</button>
+            <input id="ai-chat-input" type="text" placeholder="Ask Singh Bot about skills, experience, projects..." aria-label="Your question" />
+            <button type="submit" class="ai-send">Send</button>
           </form>
           <div class="ai-hint">Demo mode uses local canned answers unless API is configured.</div>
         </div>

@@ -89,17 +89,26 @@ body {
 
 /* AI chat bubble */
 #ai-chat { position: fixed; right: 20px; bottom: 20px; z-index: 9999; }
-#ai-chat-toggle { width: 48px; height: 48px; border-radius: 50%; border:none; background: linear-gradient(135deg, var(--color-light-blue), var(--color-purple)); color:#fff; font-size: 20px; cursor:pointer; box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
-#ai-chat-panel { position: absolute; right: 0; bottom: 60px; width: 320px; background: rgba(20,20,26,0.95); border:1px solid rgba(255,255,255,0.1); border-radius: 12px; backdrop-filter: blur(6px); box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
-.ai-chat-header { padding: 10px 12px; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.08); color:#ddd; }
-.ai-chat-log { max-height: 260px; overflow:auto; padding: 10px; display:flex; flex-direction:column; gap:8px; }
-.ai-chat-log .msg { padding:8px 10px; border-radius:8px; width: fit-content; max-width: 90%; }
-.ai-chat-log .me { background: rgba(107,197,248,0.15); align-self: flex-end; }
-.ai-chat-log .bot { background: rgba(128,0,255,0.15); align-self: flex-start; }
-#ai-chat-form { display:flex; gap:8px; padding:10px; }
-#ai-chat-input { flex:1; border-radius:8px; border:1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color:#fff; padding:8px 10px; }
-#ai-chat-form button { border-radius:8px; border:none; background: var(--color-purple); color:#fff; padding:8px 12px; cursor:pointer; }
-.ai-hint { padding: 6px 10px 10px; font-size: 12px; opacity: 0.7; }
+#ai-chat-toggle { width: 52px; height: 52px; border-radius: 14px; border:1px solid rgba(255,255,255,0.12); background: radial-gradient(120% 120% at 0% 0%, rgba(113,203,255,0.35), rgba(128,0,255,0.25)); color:#fff; font-size: 22px; cursor:pointer; box-shadow: 0 10px 35px rgba(0,0,0,0.35); backdrop-filter: blur(6px); }
+#ai-chat-toggle:hover { transform: translateY(-2px); transition: .2s ease; }
+#ai-chat-panel { position: absolute; right: 0; bottom: 68px; width: 380px; background: rgba(14, 14, 20, 0.9); border:1px solid rgba(255,255,255,0.08); border-radius: 16px; backdrop-filter: blur(8px); box-shadow: 0 18px 60px rgba(0,0,0,0.5); overflow: hidden; }
+.ai-chat-header { padding: 12px 14px; display:flex; align-items:center; justify-content:space-between; border-bottom: 1px solid rgba(255,255,255,0.08); color:#ddd; }
+.ai-chat-title { display:flex; gap:10px; align-items:center; }
+.ai-avatar { width: 28px; height:28px; border-radius:50%; background: linear-gradient(135deg, var(--color-light-blue), var(--color-purple)); display:flex; align-items:center; justify-content:center; font-weight:700; }
+.ai-name { font-weight:700; }
+.ai-sub { font-size:12px; opacity:.7; }
+.ai-close { background: transparent; border:none; color:#aaa; cursor:pointer; font-size:18px; }
+.ai-chat-log { max-height: 320px; overflow:auto; padding: 14px; display:flex; flex-direction:column; gap:10px; }
+.ai-chat-log .msg { padding:10px 12px; border-radius:12px; width: fit-content; max-width: 90%; font-size: 14px; line-height: 1.35; }
+.ai-chat-log .me { background: rgba(107,197,248,0.18); align-self: flex-end; border:1px solid rgba(107,197,248,0.35); }
+.ai-chat-log .bot { background: rgba(128,0,255,0.18); align-self: flex-start; border:1px solid rgba(128,0,255,0.35); }
+.ai-suggestions { display:flex; gap:8px; padding: 0 14px 8px; flex-wrap: wrap; }
+.ai-pill { background: rgba(255,255,255,0.06); color:#cfd3da; border:1px solid rgba(255,255,255,0.08); border-radius: 999px; padding:6px 10px; font-size:12px; cursor:pointer; }
+#ai-chat-form { display:flex; gap:10px; padding:12px 14px 14px; }
+#ai-chat-input { flex:1; border-radius:10px; border:1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); color:#fff; padding:12px 12px; font-size:14px; }
+.ai-send { border-radius:10px; border:none; background: linear-gradient(135deg, #7c3aed, #9333ea); color:#fff; padding:12px 16px; cursor:pointer; font-weight:700; }
+.ai-send:hover { filter: brightness(1.05); }
+.ai-hint { padding: 6px 14px 12px; font-size: 12px; opacity: 0.7; }
 
 /* for light mode */
 .light-mode {
