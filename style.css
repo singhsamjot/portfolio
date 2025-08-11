@@ -102,6 +102,13 @@ body {
 .ai-chat-log .msg { padding:10px 12px; border-radius:12px; width: fit-content; max-width: 90%; font-size: 14px; line-height: 1.35; color:#f1f5f9; }
 .ai-chat-log .me { background: rgba(107,197,248,0.18); align-self: flex-end; border:1px solid rgba(107,197,248,0.35); }
 .ai-chat-log .bot { background: rgba(128,0,255,0.18); align-self: flex-start; border:1px solid rgba(128,0,255,0.35); }
+.ai-chat-log .timestamp { display:block; font-size:11px; opacity:.65; margin-top:4px; }
+.typing { background: rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08); }
+.typing .dots { display:inline-flex; gap:4px; }
+.typing .dot { width:6px; height:6px; border-radius:50%; background:#cbd5e1; opacity:.7; animation: blink 1.2s infinite; }
+.typing .dot:nth-child(2){ animation-delay: .2s; }
+.typing .dot:nth-child(3){ animation-delay: .4s; }
+@keyframes blink { 0%, 80%, 100% { opacity:.2 } 40% { opacity:1 } }
 .ai-suggestions { display:flex; gap:8px; padding: 0 14px 8px; flex-wrap: wrap; }
 .ai-pill { background: rgba(255,255,255,0.06); color:#cfd3da; border:1px solid rgba(255,255,255,0.08); border-radius: 999px; padding:6px 10px; font-size:12px; cursor:pointer; }
 #ai-chat-form { display:flex; gap:10px; padding:12px 14px 14px; }

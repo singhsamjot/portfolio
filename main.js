@@ -249,11 +249,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const log = document.querySelector(".ai-chat-log");
   if (!toggle || !panel || !form || !input || !log) return;
 
+  const timeNow = () => new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   const append = (text, cls) => {
+    const wrap = document.createElement("div");
     const div = document.createElement("div");
+    const ts = document.createElement("span");
+    wrap.className = `msg-wrapper ${cls}`;
     div.className = `msg ${cls}`;
     div.textContent = text;
-    log.appendChild(div);
+    ts.className = 'timestamp';
+    ts.textContent = timeNow();
+    wrap.appendChild(div);
+    wrap.appendChild(ts);
+    log.appendChild(wrap);
     log.scrollTop = log.scrollHeight;
   };
 
@@ -276,13 +284,34 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const PROXY_URL = window.AI_PROXY_URL || ""; // Set window.AI_PROXY_URL to use your serverless proxy
+  const HISTORY_KEY = 'singhbot_history_v1';
+  // restore history
+  try {
+    const saved = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+    saved.forEach(m => append(m.text, m.role));
+  } catch {}
+
+  const saveMessage = (text, role) => {
+    try {
+      const arr = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+      arr.push({ text, role, t: Date.now() });
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(arr).slice(-4000));
+    } catch {}
+  };
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const q = input.value.trim();
     if (!q) return;
     append(q, "me");
+    saveMessage(q, 'me');
     input.value = "";
+    // typing indicator
+    const typing = document.createElement('div');
+    typing.className = 'msg typing bot';
+    typing.innerHTML = '<span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>';
+    log.appendChild(typing);
+    log.scrollTop = log.scrollHeight;
 
     // Demo fallback answers
     const demoAnswers = [
@@ -292,7 +321,10 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     if (!PROXY_URL) {
-      append(demoAnswers[Math.floor(Math.random() * demoAnswers.length)], "bot");
+      const reply = demoAnswers[Math.floor(Math.random() * demoAnswers.length)];
+      typing.remove();
+      append(reply, "bot");
+      saveMessage(reply, 'bot');
       return;
     }
 
@@ -303,9 +335,15 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({ prompt: q })
       });
       const data = await res.json();
-      append(data.reply || demoAnswers[0], "bot");
+      const reply = data.reply || demoAnswers[0];
+      typing.remove();
+      append(reply, "bot");
+      saveMessage(reply, 'bot');
     } catch (err) {
-      append("Sorry, the AI service is unavailable right now.", "bot");
+      typing.remove();
+      const reply = "Sorry, the AI service is unavailable right now.";
+      append(reply, "bot");
+      saveMessage(reply, 'bot');
     }
   });
 });
