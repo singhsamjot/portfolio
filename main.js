@@ -424,3 +424,21 @@ document.addEventListener("DOMContentLoaded", () => {
   cta.addEventListener("mousemove", onMove);
   cta.addEventListener("mouseleave", reset);
 });
+
+// Reveal progress bars on scroll
+document.addEventListener('DOMContentLoaded', () => {
+  const bars = document.querySelectorAll('.bar-fill');
+  if (!('IntersectionObserver' in window)) {
+    bars.forEach(b => b.classList.add('reveal'));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('reveal');
+        io.unobserve(e.target);
+      }
+    })
+  }, { threshold: 0.4 });
+  bars.forEach(b => io.observe(b));
+});

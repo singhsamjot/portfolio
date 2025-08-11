@@ -871,7 +871,27 @@ canvas#skillRadar {
 .skill-name { color:#cbd5e1; font-size: 14px; }
 .skill-val { color:#94a3b8; font-size: 12px; font-weight:700; }
 .bar { grid-column: 1 / -1; height: 6px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; }
-.bar-fill { height: 100%; width: var(--p); background: linear-gradient(90deg, var(--color-light-blue), var(--color-purple)); border-radius: 999px; transition: width .6s ease; }
+.bar-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--color-light-blue), var(--color-purple)); border-radius: 999px; transition: width .9s cubic-bezier(.2,.8,.2,1); }
+.bar-fill.reveal { width: var(--p); }
+
+/* Tooltips for skill rows */
+.skill-row { position: relative; }
+.skill-row[data-tip]:hover::after,
+.skill-row[data-tip]:focus-within::after { 
+  content: attr(data-tip);
+  position: absolute; left: 0; right: 0; bottom: 110%;
+  margin: 0 auto; width: max-content; max-width: 520px;
+  background: rgba(20,20,26,0.95); color: #e5e7eb;
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 8px 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  pointer-events: none; font-size: 12px;
+}
+.skill-card:hover { transform: translateY(-2px); transition: transform .2s ease, box-shadow .2s ease; box-shadow: 0 14px 40px rgba(0,0,0,.25); }
+
+@media (prefers-reduced-motion: reduce) {
+  .bar-fill { transition: none; }
+  .skill-card:hover { transform: none; box-shadow: none; }
+}
 
 .skills-badges { display:flex; flex-wrap: wrap; gap:10px; justify-content:center; margin: 16px auto; max-width: 900px; }
 .badge { background: rgba(255,255,255,0.06); color:#cfd3da; border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:6px 10px; font-size:12px; }
