@@ -117,6 +117,9 @@ body {
 .ai-send { border-radius:10px; border:none; background: linear-gradient(135deg, #7c3aed, #9333ea); color:#fff; padding:12px 16px; cursor:pointer; font-weight:700; }
 .ai-send:hover { filter: brightness(1.05); }
 .ai-hint { padding: 6px 14px 12px; font-size: 12px; opacity: 0.7; }
+.ai-footer { display:flex; justify-content:flex-end; gap:8px; padding: 0 14px 8px; }
+.ai-ghost { background: transparent; color:#cbd5e1; border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:6px 10px; font-size:12px; cursor:pointer; }
+.ai-ghost:hover { background: rgba(255,255,255,0.06); }
 
 /* for light mode */
 .light-mode {
@@ -933,6 +936,9 @@ canvas#skillRadar {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.skills-heading-article, .about-heading-article { position: relative; }
+.skills-heading-article::after, .about-heading-article::after { content:''; position:absolute; left:0; bottom:-6px; width:0; height:3px; background: linear-gradient(90deg, var(--color-light-blue), var(--color-purple)); border-radius:2px; transition: width .6s ease; }
+.skills-heading-article.reveal::after, .about-heading-article.reveal::after { width: 120px; }
 .aboutHeadingP {
   width: 300px;
   height: 1px;

@@ -247,6 +247,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("ai-chat-form");
   const input = document.getElementById("ai-chat-input");
   const log = document.querySelector(".ai-chat-log");
+  const copyBtn = document.getElementById('ai-copy');
+  const clearBtn = document.getElementById('ai-clear');
   if (!toggle || !panel || !form || !input || !log) return;
 
   const timeNow = () => new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -371,6 +373,20 @@ document.addEventListener("DOMContentLoaded", () => {
       saveMessage(reply, 'bot');
     }
   });
+
+  // Copy last bot message
+  copyBtn && copyBtn.addEventListener('click', async () => {
+    const msgs = Array.from(log.querySelectorAll('.msg.bot'));
+    if (!msgs.length) return;
+    const last = msgs[msgs.length - 1].textContent;
+    try { await navigator.clipboard.writeText(last); copyBtn.textContent = 'Copied'; setTimeout(()=> copyBtn.textContent='Copy last', 1200);} catch {}
+  });
+
+  // Clear chat history
+  clearBtn && clearBtn.addEventListener('click', () => {
+    localStorage.removeItem(HISTORY_KEY);
+    log.innerHTML = '';
+  });
 });
 
 // Accent color picker: persists in localStorage and updates CSS variables
@@ -428,8 +444,10 @@ document.addEventListener("DOMContentLoaded", () => {
 // Reveal progress bars on scroll
 document.addEventListener('DOMContentLoaded', () => {
   const bars = document.querySelectorAll('.bar-fill');
+  const headings = document.querySelectorAll('.skills-heading-article, .about-heading-article');
   if (!('IntersectionObserver' in window)) {
     bars.forEach(b => b.classList.add('reveal'));
+    headings.forEach(h => h.classList.add('reveal'));
     return;
   }
   const io = new IntersectionObserver((entries) => {
@@ -441,4 +459,5 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }, { threshold: 0.4 });
   bars.forEach(b => io.observe(b));
+  headings.forEach(h => io.observe(h));
 });
