@@ -462,6 +462,50 @@
             </div>
           </div>
           <div class="other-languages frontend-dev-section">
+            <div class="stacks-container" data-aos="fade-up">
+              <div class="stack-card">
+                <div class="stack-title">Cloud & Infra</div>
+                <div class="stack-badges">
+                  <span class="badge">AWS</span>
+                  <span class="badge">Azure</span>
+                  <span class="badge">GCP</span>
+                  <span class="badge">Docker</span>
+                  <span class="badge">Kubernetes</span>
+                  <span class="badge">Terraform</span>
+                </div>
+              </div>
+              <div class="stack-card">
+                <div class="stack-title">Backend & APIs</div>
+                <div class="stack-badges">
+                  <span class="badge">Node.js</span>
+                  <span class="badge">Express</span>
+                  <span class="badge">Django</span>
+                  <span class="badge">Flask</span>
+                  <span class="badge">REST</span>
+                  <span class="badge">GraphQL</span>
+                </div>
+              </div>
+              <div class="stack-card">
+                <div class="stack-title">Frontend</div>
+                <div class="stack-badges">
+                  <span class="badge">React</span>
+                  <span class="badge">Next.js</span>
+                  <span class="badge">Angular</span>
+                  <span class="badge">Tailwind</span>
+                  <span class="badge">Framer Motion</span>
+                </div>
+              </div>
+              <div class="stack-card">
+                <div class="stack-title">Data & Tools</div>
+                <div class="stack-badges">
+                  <span class="badge">PostgreSQL</span>
+                  <span class="badge">MySQL</span>
+                  <span class="badge">Redis</span>
+                  <span class="badge">Prisma</span>
+                  <span class="badge">Kafka</span>
+                </div>
+              </div>
+            </div>
             <div class="languages-i-know language-speak" data-aos="fade-up">
               <article>>_ Databases:</article>
             </div>
@@ -804,17 +848,25 @@
                   label: 'Proficiency',
                   data: [90, 80, 85, 90, 80, 75, 85],
                   fill: true,
-                  backgroundColor: 'rgba(128, 0, 255, 0.15)',
-                  borderColor: '#8000ff',
-                  pointBackgroundColor: '#8000ff',
+                  backgroundColor: 'rgba(128, 0, 255, 0.12)',
+                  borderColor: '#a78bfa',
+                  pointBackgroundColor: '#a78bfa',
                   pointBorderColor: '#fff',
                   pointHoverBackgroundColor: '#fff',
-                  pointHoverBorderColor: '#8000ff'
+                  pointHoverBorderColor: '#a78bfa'
                 }]
               },
               options: {
-                scales: { r: { angleLines: { color: 'rgba(255,255,255,0.1)' }, grid: { color: 'rgba(255,255,255,0.1)' }, pointLabels: { color: '#ddd', font: { size: 12 } }, suggestedMin: 0, suggestedMax: 100 } },
-                plugins: { legend: { labels: { color: '#ddd' } } }
+                plugins: { legend: { labels: { color: '#cbd5e1' } } },
+                scales: { r: {
+                  angleLines: { color: 'rgba(255,255,255,0.08)' },
+                  grid: { color: 'rgba(255,255,255,0.08)' },
+                  pointLabels: { color: '#e5e7eb', font: { size: 13 } },
+                  backgroundColor: 'rgba(255,255,255,0.02)',
+                  suggestedMin: 0,
+                  suggestedMax: 100,
+                  ticks: { showLabelBackdrop: true, color: '#9ca3af', backdropColor: 'rgba(0,0,0,0.25)' }
+                }}
               }
             });
           }

@@ -828,9 +828,9 @@ noscript {
 /* Skill radar container */
 .skill-radar-container {
   width: 100%;
-  max-width: 640px;
-  height: 360px;
-  margin: 24px 0 24px 0;
+  max-width: 680px;
+  height: 420px;
+  margin: 24px auto 24px auto;
 }
 canvas#skillRadar {
   width: 100% !important;
@@ -843,7 +843,8 @@ canvas#skillRadar {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
-  margin: 20px 0 10px 0;
+  margin: 10px auto 24px auto;
+  max-width: 960px;
 }
 
 @media (max-width: 780px) {
@@ -857,6 +858,9 @@ canvas#skillRadar {
   background: rgba(255,255,255,0.03);
   backdrop-filter: blur(4px);
 }
+.stack-title { font-weight: 700; margin-bottom: 8px; color:#e5e7eb; }
+.stack-badges { display:flex; flex-wrap: wrap; gap:8px; }
+.badge { background: rgba(255,255,255,0.06); color:#cfd3da; border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:6px 10px; font-size:12px; }
 .stack-title {
   font-weight: 700;
   color: #d4d4d8;
