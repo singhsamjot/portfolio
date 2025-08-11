@@ -441,6 +441,18 @@ document.addEventListener("DOMContentLoaded", () => {
   cta.addEventListener("mouseleave", reset);
 });
 
+// Subtle parallax on hero orbs
+document.addEventListener('mousemove', (e) => {
+  const orbs = document.querySelectorAll('.orb');
+  if (!orbs.length) return;
+  const x = (e.clientX / window.innerWidth - 0.5) * 2;
+  const y = (e.clientY / window.innerHeight - 0.5) * 2;
+  orbs.forEach((o, i) => {
+    const depth = (i + 1) * 6; // slower for deeper
+    o.style.transform = `translate3d(${x * depth}px, ${y * depth}px, 0)`;
+  });
+});
+
 // Reveal progress bars on scroll
 document.addEventListener('DOMContentLoaded', () => {
   const bars = document.querySelectorAll('.bar-fill');

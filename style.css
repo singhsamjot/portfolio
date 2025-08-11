@@ -65,6 +65,20 @@ body {
   cursor: url("cursorr.png") 10 12;
 }
 
+/* Floating gradient orbs */
+.hero-bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
+.orb { position: absolute; width: 40vw; height: 40vw; min-width: 320px; min-height: 320px; filter: blur(60px); opacity: .35; border-radius: 50%; mix-blend-mode: screen; }
+.orb-1 { background: radial-gradient(circle at 30% 30%, #6bc5f8, transparent 60%); top: -10vh; left: -10vw; animation: float1 18s ease-in-out infinite; }
+.orb-2 { background: radial-gradient(circle at 70% 30%, #a78bfa, transparent 60%); top: 20vh; right: -15vw; animation: float2 22s ease-in-out infinite; }
+.orb-3 { background: radial-gradient(circle at 50% 70%, #10b981, transparent 60%); bottom: -15vh; left: 10vw; animation: float3 26s ease-in-out infinite; }
+@keyframes float1 { 0%,100%{ transform: translate3d(0,0,0)} 50% { transform: translate3d(4vw,3vh,0)} }
+@keyframes float2 { 0%,100%{ transform: translate3d(0,0,0)} 50% { transform: translate3d(-3vw,5vh,0)} }
+@keyframes float3 { 0%,100%{ transform: translate3d(0,0,0)} 50% { transform: translate3d(2vw,-4vh,0)} }
+
+@media (prefers-reduced-motion: reduce) {
+  .orb { animation: none; }
+}
+
 /* Skip link for accessibility */
 .skip-link {
   position: absolute;
