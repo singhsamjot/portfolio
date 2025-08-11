@@ -745,45 +745,7 @@ noscript {
   transform: translateY(-7px) translateX(-7px);
 }
 
-/* Quick Email Button Styles */
-.quick-email-btn {
-  text-decoration: none;
-  margin-left: 20px;
-  display: inline-block;
-}
 
-.quick-email {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: none;
-  border-radius: 25px;
-  padding: 12px 24px;
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-.quick-email:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
-}
-
-.quick-email:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-}
-
-.quick-email svg {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
-}
 
 /* landing page code ends here */
 
