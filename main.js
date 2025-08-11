@@ -238,3 +238,113 @@ const windowResize = (event) => {
 
 window.addEventListener("mousemove", mouseMove);
 window.addEventListener("resize", windowResize);
+
+// Simple AI chat (demo) with optional proxy endpoint
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("ai-chat-toggle");
+  const panel = document.getElementById("ai-chat-panel");
+  const form = document.getElementById("ai-chat-form");
+  const input = document.getElementById("ai-chat-input");
+  const log = document.querySelector(".ai-chat-log");
+  if (!toggle || !panel || !form || !input || !log) return;
+
+  const append = (text, cls) => {
+    const div = document.createElement("div");
+    div.className = `msg ${cls}`;
+    div.textContent = text;
+    log.appendChild(div);
+    log.scrollTop = log.scrollHeight;
+  };
+
+  toggle.addEventListener("click", () => {
+    const expanded = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!expanded));
+    panel.hidden = expanded;
+  });
+
+  const PROXY_URL = window.AI_PROXY_URL || ""; // Set window.AI_PROXY_URL to use your serverless proxy
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const q = input.value.trim();
+    if (!q) return;
+    append(q, "me");
+    input.value = "";
+
+    // Demo fallback answers
+    const demoAnswers = [
+      "I build full‑stack apps with React, Angular, Django/Flask, and TypeScript.",
+      "I focus on performance, accessibility, and clean developer UX.",
+      "Email me via the big button to discuss your project!"
+    ];
+
+    if (!PROXY_URL) {
+      append(demoAnswers[Math.floor(Math.random() * demoAnswers.length)], "bot");
+      return;
+    }
+
+    try {
+      const res = await fetch(PROXY_URL, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ prompt: q })
+      });
+      const data = await res.json();
+      append(data.reply || demoAnswers[0], "bot");
+    } catch (err) {
+      append("Sorry, the AI service is unavailable right now.", "bot");
+    }
+  });
+});
+
+// Accent color picker: persists in localStorage and updates CSS variables
+document.addEventListener("DOMContentLoaded", () => {
+  const ACCENT_KEY = "accentColor";
+  const applyAccent = (color) => {
+    document.documentElement.style.setProperty("--color-light-purple", color);
+    document.documentElement.style.setProperty("--color-purple", color);
+    // Update gradient if used
+    const bgEls = document.querySelectorAll(".letsTalkBtn-BG");
+    bgEls.forEach((el) => {
+      el.style.backgroundImage = `linear-gradient(150deg, #71cbff, ${color})`;
+    });
+  };
+
+  const saved = localStorage.getItem(ACCENT_KEY);
+  if (saved) {
+    applyAccent(saved);
+    document
+      .querySelectorAll(".accent-swatch")
+      .forEach((b) => b.setAttribute("aria-checked", String(b.dataset.accent === saved)));
+  }
+  document.querySelectorAll(".accent-swatch").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const color = btn.dataset.accent;
+      localStorage.setItem(ACCENT_KEY, color);
+      applyAccent(color);
+      document
+        .querySelectorAll(".accent-swatch")
+        .forEach((b) => b.setAttribute("aria-checked", String(b === btn)));
+    });
+  });
+});
+
+// Magnetic hover for CTA button
+document.addEventListener("DOMContentLoaded", () => {
+  const cta = document.querySelector(".letsTalkBtn");
+  if (!cta) return;
+  const textEl = cta.querySelector(".letsTalkBtn-text");
+  const strength = 0.15;
+  const onMove = (e) => {
+    const rect = cta.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+    const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+    const scale = 1 + Math.min(0.06, Math.hypot(x, y) * strength);
+    textEl && (textEl.style.transform = `scale(${scale})`);
+  };
+  const reset = () => {
+    textEl && (textEl.style.transform = "scale(1)");
+  };
+  cta.addEventListener("mousemove", onMove);
+  cta.addEventListener("mouseleave", reset);
+});

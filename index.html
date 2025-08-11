@@ -48,6 +48,12 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Passions+Conflict&family=Orbitron&family=Fira+Code&family=Six+Caps"
     />
+    <style>
+      /* Accent color picker */
+      .accent-picker { display:flex; gap:10px; align-items:center; margin-left:12px; }
+      .accent-swatch { width:20px; height:20px; border-radius:50%; border:2px solid rgba(255,255,255,0.3); cursor:pointer; }
+      .accent-swatch[aria-checked="true"] { outline: 2px solid #fff; }
+    </style>
     <!-- google icons -->
     <link
       rel="stylesheet"
@@ -61,6 +67,12 @@
     <header>
       <div class="navbar" id="navbar">
         <div class="hey">Hey!</div>
+        <div class="accent-picker" role="radiogroup" aria-label="Accent color picker">
+          <button class="accent-swatch" style="background:#8000ff" aria-checked="true" aria-label="Purple" data-accent="#8000ff"></button>
+          <button class="accent-swatch" style="background:#6bc5f8" aria-checked="false" aria-label="Blue" data-accent="#6bc5f8"></button>
+          <button class="accent-swatch" style="background:#10b981" aria-checked="false" aria-label="Green" data-accent="#10b981"></button>
+          <button class="accent-swatch" style="background:#f59e0b" aria-checked="false" aria-label="Amber" data-accent="#f59e0b"></button>
+        </div>
         <div class="logo" tabindex="0" aria-label="samjot logo">
           <div class="logo-top">
             <img src="src/png/logo-headwithouteyes.png" alt="animation-head" />
@@ -116,6 +128,19 @@
 
     <a class="skip-link" href="#main">Skip to content</a>
     <main id="main">
+      <!-- AI Chat Bubble -->
+      <div id="ai-chat" aria-live="polite">
+        <button id="ai-chat-toggle" aria-expanded="false" aria-controls="ai-chat-panel" title="Ask me anything">💬</button>
+        <div id="ai-chat-panel" hidden>
+          <div class="ai-chat-header">Ask me anything</div>
+          <div class="ai-chat-log" role="log" aria-label="Chat log"></div>
+          <form id="ai-chat-form">
+            <input id="ai-chat-input" type="text" placeholder="Ask about my skills, experience, projects..." aria-label="Your question" />
+            <button type="submit">Send</button>
+          </form>
+          <div class="ai-hint">Demo mode uses local canned answers unless API is configured.</div>
+        </div>
+      </div>
       <!-- hamburger -->
       <div class="hamburger" id="hamburger" data-aos="fade">
         <div class="hamburgerbase">
@@ -384,6 +409,10 @@
               <article tabindex="0" aria-label="languages i speak below">
                 >_ Languages i speak:
               </article>
+            </div>
+            <!-- Skill Radar Chart -->
+            <div class="skill-radar-container" data-aos="fade-up" aria-label="Skill proficiency radar">
+              <canvas id="skillRadar" width="400" height="400" aria-label="Skill radar chart" role="img"></canvas>
             </div>
             <div class="languages-section">
               <div class="language-name" data-aos="fade-up" id="html">
@@ -730,6 +759,8 @@
     <!-- footer ends here -->
   </body>
 
+  <!-- Chart.js for skill radar -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
   <script src="main.js" defer></script>
 
   <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
@@ -744,6 +775,33 @@
             duration: 600,
             easing: 'ease-out-cubic'
           });
+        }
+        // Initialize skill radar when Chart is available
+        if (window.Chart) {
+          const ctx = document.getElementById('skillRadar');
+          if (ctx) {
+            new Chart(ctx, {
+              type: 'radar',
+              data: {
+                labels: ['React', 'Angular', 'TypeScript', 'JavaScript', 'Python', 'Java', 'SQL'],
+                datasets: [{
+                  label: 'Proficiency',
+                  data: [90, 80, 85, 90, 80, 75, 85],
+                  fill: true,
+                  backgroundColor: 'rgba(128, 0, 255, 0.15)',
+                  borderColor: '#8000ff',
+                  pointBackgroundColor: '#8000ff',
+                  pointBorderColor: '#fff',
+                  pointHoverBackgroundColor: '#fff',
+                  pointHoverBorderColor: '#8000ff'
+                }]
+              },
+              options: {
+                scales: { r: { angleLines: { color: 'rgba(255,255,255,0.1)' }, grid: { color: 'rgba(255,255,255,0.1)' }, pointLabels: { color: '#ddd', font: { size: 12 } }, suggestedMin: 0, suggestedMax: 100 } },
+                plugins: { legend: { labels: { color: '#ddd' } } }
+              }
+            });
+          }
         }
       });
     }
