@@ -457,9 +457,11 @@ document.addEventListener('mousemove', (e) => {
 document.addEventListener('DOMContentLoaded', () => {
   const bars = document.querySelectorAll('.bar-fill');
   const headings = document.querySelectorAll('.skills-heading-article, .about-heading-article');
+  const revealItems = document.querySelectorAll('.reveal-item');
   if (!('IntersectionObserver' in window)) {
     bars.forEach(b => b.classList.add('reveal'));
     headings.forEach(h => h.classList.add('reveal'));
+    revealItems.forEach(i => i.classList.add('reveal-in'));
     return;
   }
   const io = new IntersectionObserver((entries) => {
@@ -472,4 +474,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.4 });
   bars.forEach(b => io.observe(b));
   headings.forEach(h => io.observe(h));
+
+  const io2 = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('reveal-in');
+        io2.unobserve(e.target);
+      }
+    })
+  }, { threshold: 0.2 });
+  revealItems.forEach((i, idx) => {
+    i.style.transitionDelay = `${Math.min(idx * 60, 300)}ms`;
+    io2.observe(i);
+  });
 });

@@ -44,6 +44,11 @@ html {
   --color-light-blue: #6bc5f8;
   --color-navbarBorder-dark: #20222e10;
   --color-shadowDark: rgba(0, 0, 0, 0.137);
+  /* Responsive type scale */
+  --fs-xxl: clamp(3.2rem, 2.2rem + 2.4vw, 5.2rem);
+  --fs-xl: clamp(2.4rem, 1.8rem + 1.4vw, 3.6rem);
+  --fs-lg: clamp(1.8rem, 1.6rem + .6vw, 2.4rem);
+  --fs-md: clamp(1.6rem, 1.4rem + .3vw, 1.8rem);
 }
 ::-webkit-scrollbar {
   width: 5px;
@@ -953,6 +958,13 @@ canvas#skillRadar {
 .skills-heading-article, .about-heading-article { position: relative; }
 .skills-heading-article::after, .about-heading-article::after { content:''; position:absolute; left:0; bottom:-6px; width:0; height:3px; background: linear-gradient(90deg, var(--color-light-blue), var(--color-purple)); border-radius:2px; transition: width .6s ease; }
 .skills-heading-article.reveal::after, .about-heading-article.reveal::after { width: 120px; }
+/* Responsive heading sizes */
+.skills-heading-article, .about-heading-article { font-size: var(--fs-xl); }
+#info-para { font-size: var(--fs-md); line-height: 1.7; max-width: 68ch; }
+
+/* Staggered reveal utility */
+.reveal-item { opacity: 0; transform: translateY(12px); will-change: transform, opacity; }
+.reveal-in { opacity: 1; transform: none; transition: opacity .5s ease, transform .5s ease; }
 .aboutHeadingP {
   width: 300px;
   height: 1px;
