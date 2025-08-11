@@ -65,6 +65,28 @@ body {
   cursor: url("cursorr.png") 10 12;
 }
 
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-link:focus {
+  left: 16px;
+  top: 16px;
+  width: auto;
+  height: auto;
+  padding: 10px 14px;
+  background: #fff;
+  color: #000;
+  border-radius: 6px;
+  z-index: 10000;
+}
+
 /* for light mode */
 .light-mode {
   --color-dark-mode: #ece7e1;
