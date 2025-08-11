@@ -285,6 +285,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const PROXY_URL = window.AI_PROXY_URL || ""; // Set window.AI_PROXY_URL to use your serverless proxy
   const HISTORY_KEY = 'singhbot_history_v1';
+  // Lightweight local knowledge base to avoid weird/duplicate demo replies
+  const KB = {
+    intro: "Hi! I'm Singh Bot. I can answer questions about Samjot's skills, experience and toolset.",
+    summary: "Samjot is a full‑stack developer with 8+ years building modern web apps. Frontend: React/Next.js and Angular. Backend: Node.js/Express and Python (Django/Flask). Strong TypeScript, SQL, and cloud (AWS/Azure/GCP).",
+    experience: "8+ years shipping user‑focused products end‑to‑end: React/Angular UIs, TypeScript, Node/Django APIs, SQL/Redis data, CI/CD and cloud infra (AWS/Azure/GCP). Emphasis on performance, accessibility and clean DX.",
+    frontend: "Frontend focus: React/Next.js, Angular, TypeScript, Tailwind/CSS, testing with Jest/Cypress, animations with Framer Motion.",
+    backend: "Backend stack: Node.js/Express, Python with Django/Flask, REST and GraphQL APIs, Auth, caching with Redis, background jobs, testing.",
+    devops: "Cloud & DevOps: AWS/Azure/GCP, Docker/Kubernetes, CI/CD (GitHub Actions), IaC with Terraform.",
+    contact: "Best way to contact: use the Email Me button at the top or write to samjotsinghcode@gmail.com."
+  };
+
+  let lastReply = "";
+  const localAnswer = (qRaw) => {
+    const q = (qRaw || '').toLowerCase();
+    const includesAny = (arr) => arr.some(k => q.includes(k));
+    if (includesAny(["hi","hello","hey","yo","hola"])) return "Hey! How can I help? Ask about skills, experience, stack or contact.";
+    if (includesAny(["summary","overview","about you"])) return KB.summary;
+    if (includesAny(["experience","years","background"])) return KB.experience;
+    if (includesAny(["front","react","next","angular","ui"])) return KB.frontend;
+    if (includesAny(["back","api","node","django","flask","server"])) return KB.backend;
+    if (includesAny(["cloud","aws","azure","gcp","devops","docker","kubernetes","k8s","terraform"])) return KB.devops;
+    if (includesAny(["contact","email","reach","connect"])) return KB.contact;
+    if (includesAny(["skills","stack","tech"])) return `${KB.frontend} ${KB.backend} ${KB.devops}`;
+    return "I can help with skills, experience, stack, projects or contact info. Try: “What’s your stack?” or “Tell me your experience.”";
+  };
   // restore history
   try {
     const saved = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
@@ -313,15 +338,13 @@ document.addEventListener("DOMContentLoaded", () => {
     log.appendChild(typing);
     log.scrollTop = log.scrollHeight;
 
-    // Demo fallback answers
-    const demoAnswers = [
-      "I build full‑stack apps with React, Angular, Django/Flask, and TypeScript.",
-      "I focus on performance, accessibility, and clean developer UX.",
-      "Email me via the big button to discuss your project!"
-    ];
-
     if (!PROXY_URL) {
-      const reply = demoAnswers[Math.floor(Math.random() * demoAnswers.length)];
+      let reply = localAnswer(q);
+      if (reply === lastReply) {
+        // provide variation by appending a short extra hint once
+        reply = reply + " If you want specifics, ask about frontend, backend or cloud.";
+      }
+      lastReply = reply;
       typing.remove();
       append(reply, "bot");
       saveMessage(reply, 'bot');
@@ -335,13 +358,15 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({ prompt: q })
       });
       const data = await res.json();
-      const reply = data.reply || demoAnswers[0];
+      let reply = data.reply || localAnswer(q);
+      if (reply === lastReply) reply = reply + " Anything else you’d like to know?";
+      lastReply = reply;
       typing.remove();
       append(reply, "bot");
       saveMessage(reply, 'bot');
     } catch (err) {
       typing.remove();
-      const reply = "Sorry, the AI service is unavailable right now.";
+      const reply = localAnswer(q);
       append(reply, "bot");
       saveMessage(reply, 'bot');
     }
