@@ -462,6 +462,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('.theme-preset').forEach((b)=>{
     b.addEventListener('click', ()=> setPreset(b.dataset.preset));
   })
+
+  // Initialize lucide icons
+  try { window.lucide && window.lucide.createIcons(); } catch {}
 });
 
 // Magnetic hover for CTA button
