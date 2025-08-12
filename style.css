@@ -2,6 +2,40 @@
 #scroll-progress { position: fixed; top:0; left:0; height:3px; width:0; z-index: 1000; background: linear-gradient(90deg, var(--color-light-blue,#80d4ff), var(--color-light-purple,#a78bfa)); box-shadow: 0 0 12px rgba(167,139,250,.6); transition: width .1s ease; }
 /* Futuristic background particles canvas */
 #bg-anim { position: fixed; inset: 0; z-index: -3; pointer-events:none; background: radial-gradient(1200px 600px at 20% 80%, rgba(14,110,90,0.25), transparent 50%), radial-gradient(1000px 600px at 95% 20%, rgba(80,0,120,0.22), transparent 55%), linear-gradient(180deg, #090a12 0%, #0b0b12 60%); }
+/* Theme variables */
+:root {
+  --color-light-blue: #80d4ff;
+  --color-light-purple: #a78bfa;
+  --bg-spot-a: rgba(14,110,90,0.25);
+  --bg-spot-b: rgba(80,0,120,0.22);
+  --bg-base-top: #090a12;
+  --bg-base-bottom: #0b0b12;
+}
+.theme-neo {
+  --color-light-blue: #80d4ff;
+  --color-light-purple: #a78bfa;
+  --bg-spot-a: rgba(14,110,90,0.28);
+  --bg-spot-b: rgba(128,0,255,0.22);
+  --bg-base-top: #090a12;
+  --bg-base-bottom: #0b0b12;
+}
+.theme-aurora {
+  --color-light-blue: #22d3ee;
+  --color-light-purple: #6ee7b7;
+  --bg-spot-a: rgba(34,211,238,0.22);
+  --bg-spot-b: rgba(110,231,183,0.22);
+  --bg-base-top: #071217;
+  --bg-base-bottom: #09151a;
+}
+.theme-midnight {
+  --color-light-blue: #60a5fa;
+  --color-light-purple: #9333ea;
+  --bg-spot-a: rgba(37,99,235,0.22);
+  --bg-spot-b: rgba(147,51,234,0.22);
+  --bg-base-top: #070a12;
+  --bg-base-bottom: #0a0f1a;
+}
+
 .skill-tabs { display:flex; gap:10px; justify-content:center; margin: 0 auto 14px; }
 .skill-tab { background: rgba(255,255,255,0.06); color:#e5e7eb; border:1px solid rgba(255,255,255,0.1); border-radius: 999px; padding:8px 14px; font-size: 12px; cursor:pointer; }
 .skill-tab.active { background: linear-gradient(90deg, var(--color-light-blue), var(--color-purple)); color:#0b0b12; border-color: transparent; }

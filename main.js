@@ -490,31 +490,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Theme presets (persist + active state)
-  const PRESET_KEY = 'theme_preset_v1';
-  const setPreset = (name) => {
-    const root = document.documentElement;
-    if (name === 'neo') {
-      root.style.setProperty('--color-light-blue', '#80d4ff');
-      root.style.setProperty('--color-light-purple', '#a78bfa');
-    } else if (name === 'aurora') {
-      root.style.setProperty('--color-light-blue', '#6ee7b7');
-      root.style.setProperty('--color-light-purple', '#22d3ee');
-    } else if (name === 'midnight') {
-      root.style.setProperty('--color-light-blue', '#60a5fa');
-      root.style.setProperty('--color-light-purple', '#9333ea');
-    }
-    try { localStorage.setItem(PRESET_KEY, name); } catch {}
+  // Theme presets (persist class on <body>)
+  const PRESET_KEY = 'theme_preset_v2';
+  const applyThemeClass = (name) => {
+    document.body.classList.remove('theme-neo', 'theme-aurora', 'theme-midnight');
+    document.body.classList.add(`theme-${name}`);
     document.querySelectorAll('.theme-preset').forEach((x)=> x.classList.toggle('active', x.dataset.preset === name));
+    try { localStorage.setItem(PRESET_KEY, name); } catch {}
+    // update background gradient to reflect vars
+    const bg = document.getElementById('bg-anim');
+    if (bg) {
+      bg.style.background = `radial-gradient(1200px 600px at 20% 80%, var(--bg-spot-a), transparent 50%), radial-gradient(1000px 600px at 95% 20%, var(--bg-spot-b), transparent 55%), linear-gradient(180deg, var(--bg-base-top) 0%, var(--bg-base-bottom) 60%)`;
+    }
   };
-  // hydrate saved preset
-  try {
-    const savedPreset = localStorage.getItem(PRESET_KEY);
-    if (savedPreset) setPreset(savedPreset);
-    else setPreset('neo');
-  } catch { setPreset('neo'); }
+  const savedPreset = localStorage.getItem(PRESET_KEY) || 'neo';
+  applyThemeClass(savedPreset);
   document.querySelectorAll('.theme-preset').forEach((b)=>{
-    b.addEventListener('click', ()=> setPreset(b.dataset.preset));
+    b.addEventListener('click', ()=> applyThemeClass(b.dataset.preset));
   });
 
   // Initialize lucide icons
