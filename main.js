@@ -458,7 +458,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Theme presets
+  // Theme presets (persist + active state)
+  const PRESET_KEY = 'theme_preset_v1';
   const setPreset = (name) => {
     const root = document.documentElement;
     if (name === 'neo') {
@@ -471,10 +472,18 @@ document.addEventListener("DOMContentLoaded", () => {
       root.style.setProperty('--color-light-blue', '#60a5fa');
       root.style.setProperty('--color-light-purple', '#9333ea');
     }
+    try { localStorage.setItem(PRESET_KEY, name); } catch {}
+    document.querySelectorAll('.theme-preset').forEach((x)=> x.classList.toggle('active', x.dataset.preset === name));
   };
+  // hydrate saved preset
+  try {
+    const savedPreset = localStorage.getItem(PRESET_KEY);
+    if (savedPreset) setPreset(savedPreset);
+    else setPreset('neo');
+  } catch { setPreset('neo'); }
   document.querySelectorAll('.theme-preset').forEach((b)=>{
     b.addEventListener('click', ()=> setPreset(b.dataset.preset));
-  })
+  });
 
   // Initialize lucide icons
   try { window.lucide && window.lucide.createIcons(); } catch {}

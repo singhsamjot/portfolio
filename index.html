@@ -57,10 +57,14 @@
     <style>
       /* Accent color picker */
       .accent-picker { display:flex; gap:10px; align-items:center; margin-left:12px; }
-      .accent-swatch { width:20px; height:20px; border-radius:50%; border:2px solid rgba(255,255,255,0.3); cursor:pointer; }
-      .accent-swatch[aria-checked="true"] { outline: 2px solid #fff; }
+      .accent-swatch { width:20px; height:20px; border-radius:50%; border:2px solid rgba(255,255,255,0.3); cursor:pointer; outline:none; transition: box-shadow .2s ease; }
+      .accent-swatch[aria-checked="true"] { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--color-light-blue, #80d4ff); }
+      .accent-swatch:focus-visible { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--color-light-blue, #80d4ff); }
+      /* Theme presets */
       .theme-presets { display:flex; gap:8px; margin-left:8px; }
-      .theme-preset { font-size:12px; background: rgba(255,255,255,0.06); color:#e5e7eb; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:6px 10px; cursor:pointer; }
+      .theme-preset { font-size:12px; background: rgba(255,255,255,0.06); color:#e5e7eb; border:1px solid rgba(255,255,255,0.1); border-radius:999px; padding:8px 12px; cursor:pointer; outline:none; transition: background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease; }
+      .theme-preset.active { background: linear-gradient(90deg, var(--color-light-blue, #80d4ff), var(--color-light-purple, #a78bfa)); color:#0b0b12; border-color: transparent; }
+      .theme-preset:focus-visible { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--color-light-blue, #80d4ff); }
     </style>
     <!-- google icons -->
     <link
