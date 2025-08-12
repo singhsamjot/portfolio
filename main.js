@@ -254,6 +254,38 @@ window.addEventListener("resize", windowResize);
 
 // Simple AI chat (demo) with optional proxy endpoint
 document.addEventListener("DOMContentLoaded", () => {
+  // Initialize tsParticles background (futuristic neon orbs + trails)
+  try {
+    if (window.tsParticles) {
+      window.tsParticles.load("bg-anim", {
+        fullScreen: { enable: false },
+        background: { color: "transparent" },
+        particles: {
+          number: { value: 70, density: { enable: true, area: 1200 } },
+          color: { value: ["#80d4ff", "#a78bfa", "#6ee7b7"] },
+          shape: { type: "circle" },
+          opacity: { value: 0.25 },
+          size: { value: { min: 1, max: 3 } },
+          links: { enable: true, distance: 120, color: "#6bc5f8", opacity: 0.12, width: 1 },
+          move: { enable: true, speed: 0.6, outModes: { default: "bounce" } },
+          life: { duration: { value: 0 } }
+        },
+        interactivity: {
+          events: {
+            onHover: { enable: true, mode: ["repulse", "trail"] },
+            resize: true
+          },
+          modes: {
+            repulse: { distance: 80, duration: 0.3 },
+            trail: { delay: 0.005, quantity: 2, pauseOnStop: true }
+          }
+        },
+        detectRetina: true,
+        pauseOnBlur: true,
+        pauseOnOutsideViewport: true
+      });
+    }
+  } catch {}
   const toggle = document.getElementById("ai-chat-toggle");
   const panel = document.getElementById("ai-chat-panel");
   const closeBtn = document.querySelector('.ai-close');

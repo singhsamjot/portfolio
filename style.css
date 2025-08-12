@@ -1,3 +1,5 @@
+/* Futuristic background particles canvas */
+#bg-anim { position: fixed; inset: 0; z-index: -3; background: radial-gradient(1200px 600px at 20% 80%, rgba(14,110,90,0.25), transparent 50%), radial-gradient(1000px 600px at 95% 20%, rgba(80,0,120,0.22), transparent 55%), linear-gradient(180deg, #090a12 0%, #0b0b12 60%); }
 .skill-tabs { display:flex; gap:10px; justify-content:center; margin: 0 auto 14px; }
 .skill-tab { background: rgba(255,255,255,0.06); color:#e5e7eb; border:1px solid rgba(255,255,255,0.1); border-radius: 999px; padding:8px 14px; font-size: 12px; cursor:pointer; }
 .skill-tab.active { background: linear-gradient(90deg, var(--color-light-blue), var(--color-purple)); color:#0b0b12; border-color: transparent; }
