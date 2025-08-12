@@ -1,11 +1,12 @@
 .skill-tabs { display:flex; gap:10px; justify-content:center; margin: 0 auto 14px; }
 .skill-tab { background: rgba(255,255,255,0.06); color:#e5e7eb; border:1px solid rgba(255,255,255,0.1); border-radius: 999px; padding:8px 14px; font-size: 12px; cursor:pointer; }
 .skill-tab.active { background: linear-gradient(90deg, var(--color-light-blue), var(--color-purple)); color:#0b0b12; border-color: transparent; }
-.skill-matrix { display:grid; width: 100%; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 12px; max-width: 1100px; margin: 0 auto 34px; grid-auto-rows: 120px; }
+.skill-tab { user-select:none; }
+.skill-matrix { display:grid; width: 100%; min-width: 100%; flex: 1 1 100%; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 12px; max-width: 1100px; margin: 0 auto 34px; grid-auto-rows: 120px; }
 @media (max-width: 1100px){ .skill-matrix { grid-template-columns: repeat(3, minmax(0,1fr)); } }
 @media (max-width: 900px){ .skill-matrix { grid-template-columns: repeat(2, minmax(0,1fr)); } }
 @media (max-width: 560px){ .skill-matrix { grid-template-columns: 1fr; } }
-.skill-tile .flip-front, .skill-tile .flip-back { background: transparent; }
+.skill-tile .flip-front, .skill-tile .flip-back { background: transparent; color:#e5e7eb; }
 .skill-tile .flip-front, .skill-tile .flip-back { display:flex; flex-direction:column; gap:6px; padding:12px; color:#e5e7eb; }
 .skill-tile i { width:18px; height:18px; }
 .skill-tile em { font-style: normal; font-size: 12px; color:#9ca3af; }
