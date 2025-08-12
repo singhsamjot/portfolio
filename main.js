@@ -585,3 +585,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.3 });
   rings.forEach(r => io3.observe(r));
 });
+
+// Skill matrix filtering
+document.addEventListener('DOMContentLoaded', () => {
+  const tabs = document.querySelectorAll('.skill-tab');
+  const tiles = document.querySelectorAll('.skill-matrix .skill-tile');
+  if (!tabs.length) return;
+  tabs.forEach(t => t.addEventListener('click', () => {
+    tabs.forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    const f = t.dataset.filter;
+    tiles.forEach(tile => {
+      tile.style.display = (f === 'all' || tile.dataset.type === f) ? '' : 'none';
+    });
+  }));
+});
