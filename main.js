@@ -703,6 +703,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.2 });
   impactCards.forEach(c => io5.observe(c));
 
+  // Count up animation for impact numbers
+  const counters = document.querySelectorAll('.impact-count');
+  const io6 = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const el = e.target; io6.unobserve(el);
+      const target = Number(el.dataset.target || 0);
+      const suffix = el.dataset.suffix || '';
+      const isNegative = target < 0;
+      const absTarget = Math.abs(target);
+      const duration = 900; // ms
+      const start = performance.now();
+      const step = (now) => {
+        const t = Math.min(1, (now - start) / duration);
+        const val = Math.round(absTarget * t);
+        el.textContent = `${isNegative ? '-' : ''}${val}${suffix}`;
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    })
+  }, { threshold: 0.6 });
+  counters.forEach(c => io6.observe(c));
+
   // Scroll parallax for cards (avoid overriding 3D transforms on tiles)
   const pxCards = document.querySelectorAll('.parallax-card');
   window.addEventListener('scroll', () => {
