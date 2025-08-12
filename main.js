@@ -498,6 +498,35 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   cta.addEventListener("mousemove", onMove);
   cta.addEventListener("mouseleave", reset);
+
+  // Confetti burst on click (reduced-motion safe)
+  cta.addEventListener('click', () => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const count = 50;
+    const end = Date.now() + 600;
+    (function frame(){
+      const timeLeft = end - Date.now();
+      if (timeLeft <= 0) return;
+      const particles = Math.round(5 * (timeLeft / 600));
+      try {
+        // tiny fallback confetti using CSS circles
+        for (let i=0;i<particles;i++){
+          const dot = document.createElement('span');
+          dot.style.position='fixed';
+          dot.style.left = (event.clientX + (Math.random()-0.5)*80) + 'px';
+          dot.style.top = (event.clientY + (Math.random()-0.5)*40) + 'px';
+          dot.style.width=dot.style.height='6px';
+          dot.style.borderRadius='50%';
+          dot.style.background = `hsl(${Math.random()*360},90%,60%)`;
+          dot.style.pointerEvents='none';
+          dot.style.zIndex='9999';
+          document.body.appendChild(dot);
+          setTimeout(()=>dot.remove(), 700);
+        }
+      } catch {}
+      requestAnimationFrame(frame);
+    })();
+  });
 });
 
 // Subtle parallax on hero orbs
@@ -612,4 +641,12 @@ document.addEventListener('DOMContentLoaded', () => {
       tile.style.display = (f === 'all' || tile.dataset.type === f) ? '' : 'none';
     });
   }));
+
+  // Flip on hover (desktop) or tap (mobile)
+  tiles.forEach(tile => {
+    const handler = () => tile.classList.toggle('is-flipped');
+    tile.addEventListener('mouseenter', handler);
+    tile.addEventListener('mouseleave', handler);
+    tile.addEventListener('click', handler);
+  });
 });
