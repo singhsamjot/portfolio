@@ -552,7 +552,8 @@ document.addEventListener('mousemove', (e) => {
 
 // 3D tilt effect for cards
 document.addEventListener('DOMContentLoaded', () => {
-  const cards = document.querySelectorAll('.tilt');
+  // Avoid transform conflicts: skip tilt on elements that also use parallax or flip
+  const cards = document.querySelectorAll('.tilt:not(.parallax-card):not(.skill-tile)');
   cards.forEach((card) => {
     const strength = 10;
     const onMove = (e) => {
@@ -648,14 +649,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.25 });
   blurItems.forEach(b => io4.observe(b));
 
-  // Scroll parallax for cards
+  // Scroll parallax for cards (avoid overriding 3D transforms on tiles)
   const pxCards = document.querySelectorAll('.parallax-card');
   window.addEventListener('scroll', () => {
     const y = window.scrollY || window.pageYOffset;
     pxCards.forEach((c, i) => {
       const speed = 0.05 + (i % 3) * 0.02;
       const offset = (y - c.offsetTop) * speed;
-      c.style.transform = `translateY(${offset}px)`;
+      if (!c.classList.contains('skill-tile')) {
+        c.style.transform = `translateY(${offset}px)`;
+      }
     })
   }, { passive: true });
 });
@@ -674,11 +677,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }));
 
-  // Flip on hover (desktop) or tap (mobile)
+  // Flip: hover on desktop, click on touch devices
+  const canHover = window.matchMedia('(hover: hover)').matches && window.matchMedia('(pointer: fine)').matches;
   tiles.forEach(tile => {
-    const handler = () => tile.classList.toggle('is-flipped');
-    tile.addEventListener('mouseenter', handler);
-    tile.addEventListener('mouseleave', handler);
-    tile.addEventListener('click', handler);
+    if (canHover) {
+      tile.addEventListener('mouseenter', () => tile.classList.add('is-flipped'));
+      tile.addEventListener('mouseleave', () => tile.classList.remove('is-flipped'));
+    } else {
+      tile.addEventListener('click', () => tile.classList.toggle('is-flipped'));
+    }
   });
 });

@@ -24,7 +24,7 @@
 .ring:hover { box-shadow: 0 16px 40px rgba(128,0,255,0.4); animation: ringPulse 1.6s ease-out infinite; }
 @keyframes ringPulse { 0%,100%{ filter: drop-shadow(0 0 0 rgba(167,139,250,.2)) } 50%{ filter: drop-shadow(0 0 10px rgba(167,139,250,.45)) } }
 .skill-matrix { perspective: 800px; }
-.skill-tile { position: relative; transform-style: preserve-3d; transition: transform .6s cubic-bezier(.2,.8,.2,1); cursor: default; overflow:hidden; }
+.skill-tile { position: relative; transform-style: preserve-3d; transition: transform .6s cubic-bezier(.2,.8,.2,1); cursor: default; overflow:hidden; will-change: transform; }
 .skill-tile { display:block; height: 120px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); background: rgba(16,16,24,0.6); backdrop-filter: blur(6px); min-width: 0; box-sizing: border-box; }
 @media (max-width: 540px){ .skill-tile { height: 100px; } }
 .skill-tile .flip-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; }
@@ -32,6 +32,7 @@
 .skill-tile .flip-front, .skill-tile .flip-back { background: transparent; }
 .skill-tile .flip-back { transform: rotateY(180deg); background: rgba(12,12,18,0.9); }
 .skill-tile.is-flipped { transform: rotateY(180deg); }
+@media (prefers-reduced-motion: reduce) { .skill-tile { transition: none; } }
 .highlights-section, .services-section { width: 100%; display:flex; justify-content:center; }
 .highlights-wrap, .services-wrap { width: 60%; }
 @media (max-width: 1100px){ .highlights-wrap, .services-wrap { width: 80%; } }
