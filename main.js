@@ -704,8 +704,17 @@ document.addEventListener('DOMContentLoaded', () => {
     tabs.forEach(x => x.classList.remove('active'));
     t.classList.add('active');
     const f = t.dataset.filter;
+    // filter with fade to avoid layout thrash/overlap
     tiles.forEach(tile => {
-      tile.style.display = (f === 'all' || tile.dataset.type === f) ? '' : 'none';
+      const show = (f === 'all' || tile.dataset.type === f);
+      if (show) {
+        tile.style.display = '';
+        requestAnimationFrame(()=>{ tile.style.opacity = '1'; tile.style.pointerEvents='auto'; });
+      } else {
+        tile.style.opacity = '0';
+        tile.style.pointerEvents = 'none';
+        setTimeout(()=>{ tile.style.display = 'none'; }, 150);
+      }
     });
   }));
 

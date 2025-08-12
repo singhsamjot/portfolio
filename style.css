@@ -6,7 +6,7 @@
 .skill-tab { user-select:none; }
 .skill-matrix { display:grid; width: 100%; min-width: 100%; flex: 1 1 100%; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 12px; max-width: 1100px; margin: 0 auto 34px; grid-auto-rows: 120px; }
 @media (max-width: 1100px){ .skill-matrix { grid-template-columns: repeat(3, minmax(0,1fr)); } }
-@media (max-width: 900px){ .skill-matrix { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 900px){ .skill-matrix { grid-template-columns: repeat(2, minmax(0,1fr)); } .skill-tile{ height:140px; } }
 @media (max-width: 560px){ .skill-matrix { grid-template-columns: 1fr; } }
 .skill-tile .flip-front, .skill-tile .flip-back { background: transparent; color:#e5e7eb; }
 .skill-tile .flip-front, .skill-tile .flip-back { display:flex; flex-direction:column; gap:6px; padding:12px; color:#e5e7eb; }
@@ -28,12 +28,13 @@
 .skill-matrix { perspective: 800px; }
 .skill-tile { position: relative; transform-style: preserve-3d; transition: transform .6s cubic-bezier(.2,.8,.2,1); cursor: default; overflow:hidden; will-change: transform; }
 .skill-tile { display:block; height: 120px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); background: rgba(16,16,24,0.6); backdrop-filter: blur(6px); min-width: 0; box-sizing: border-box; }
+.skill-matrix .skill-tile { opacity:1; transition: opacity .18s ease; }
 @media (max-width: 540px){ .skill-tile { height: 100px; } }
-.skill-tile .flip-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; }
+.skill-tile .flip-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
 .skill-tile .flip-front, .skill-tile .flip-back { position: absolute; inset: 0; display:flex; flex-direction:column; justify-content:center; gap:6px; padding:12px; border-radius:12px; backface-visibility: hidden; }
 .skill-tile .flip-front, .skill-tile .flip-back { background: transparent; }
 .skill-tile .flip-back { transform: rotateY(180deg); background: rgba(12,12,18,0.9); }
-.skill-tile.is-flipped { transform: rotateY(180deg); }
+.skill-tile.is-flipped .flip-inner { transform: rotateY(180deg); }
 @media (prefers-reduced-motion: reduce) { .skill-tile { transition: none; } }
 .highlights-section, .services-section { width: 100%; display:flex; justify-content:center; }
 .highlights-wrap, .services-wrap { width: 60%; }
