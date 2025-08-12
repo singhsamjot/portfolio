@@ -38,12 +38,17 @@
 .skill-tile .flip-back { transform: rotateY(180deg); background: rgba(12,12,18,0.9); }
 .skill-tile.is-flipped .flip-inner { transform: rotateY(180deg); }
 @media (prefers-reduced-motion: reduce) { .skill-tile { transition: none; } }
-.highlights-section, .services-section { width: 100%; display:flex; justify-content:center; }
-.highlights-wrap, .services-wrap { width: 60%; position: relative; z-index: 1; }
-@media (max-width: 1100px){ .highlights-wrap, .services-wrap { width: 80%; } }
-.highlights-grid, .services-grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:22px; margin: 22px 0 36px; }
-@media (max-width: 980px){ .highlights-grid, .services-grid { grid-template-columns: 1fr; } }
-.highlight-card, .service-card { min-height: 200px; }
+/* Impact section */
+.impact-section { width: 100%; display:flex; justify-content:center; }
+.impact-wrap { width: 60%; position: relative; z-index: 1; }
+@media (max-width: 1100px){ .impact-wrap { width: 80%; } }
+.impact-grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:22px; margin: 22px 0 60px; }
+@media (max-width: 980px){ .impact-grid { grid-template-columns: 1fr; } }
+.impact-card { position:relative; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 18px 18px 16px; background: rgba(16,16,24,0.6); backdrop-filter: blur(6px); }
+.impact-card::before { content:''; position:absolute; inset:0; padding:1px; border-radius:16px; background: linear-gradient(135deg, rgba(107,197,248,0.45), rgba(167,139,250,0.45)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events:none; }
+.impact-eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:12px; color:#a0a7b4; background: rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius: 999px; padding:6px 10px; margin-bottom:10px; }
+.impact-title { font-size: clamp(18px, 2vw, 28px); font-weight: 800; color:#e5e7eb; margin-bottom:10px; }
+.impact-card ul { margin:0; padding-left: 16px; color:#cfd3da; }
 .highlight-card, .service-card {
   border:1px solid rgba(255,255,255,0.12);
   border-radius:16px;
