@@ -45,6 +45,8 @@
 .impact-grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:22px; margin: 22px 0 60px; }
 @media (max-width: 980px){ .impact-grid { grid-template-columns: 1fr; } }
 .impact-card { position:relative; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 18px 18px 16px; background: rgba(16,16,24,0.6); backdrop-filter: blur(6px); }
+.impact-card.reveal-in { animation: liftIn .6s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes liftIn { from { opacity:0; transform: translateY(14px) scale(.98); } to { opacity:1; transform: none; } }
 .impact-card::before { content:''; position:absolute; inset:0; padding:1px; border-radius:16px; background: linear-gradient(135deg, rgba(107,197,248,0.45), rgba(167,139,250,0.45)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events:none; }
 .impact-eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:12px; color:#a0a7b4; background: rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius: 999px; padding:6px 10px; margin-bottom:10px; }
 .impact-title { font-size: clamp(18px, 2vw, 28px); font-weight: 800; color:#e5e7eb; margin-bottom:10px; }

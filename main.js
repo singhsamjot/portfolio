@@ -691,6 +691,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.25 });
   blurItems.forEach(b => io4.observe(b));
 
+  // Impact cards entrance
+  const impactCards = document.querySelectorAll('.impact-card');
+  const io5 = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('reveal-in');
+        io5.unobserve(e.target);
+      }
+    })
+  }, { threshold: 0.2 });
+  impactCards.forEach(c => io5.observe(c));
+
   // Scroll parallax for cards (avoid overriding 3D transforms on tiles)
   const pxCards = document.querySelectorAll('.parallax-card');
   window.addEventListener('scroll', () => {
