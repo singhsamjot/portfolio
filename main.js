@@ -738,4 +738,8 @@ document.addEventListener('DOMContentLoaded', () => {
       tile.addEventListener('click', () => tile.classList.toggle('is-flipped'));
     }
   });
+
+  // Force a relayout after filtering to ensure grids reserve space
+  const forceReflow = () => document.querySelector('.skill-matrix')?.getBoundingClientRect();
+  tabs.forEach(t => t.addEventListener('click', () => setTimeout(forceReflow, 160)));
 });
