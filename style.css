@@ -402,6 +402,8 @@ noscript {
   gap: 80px;
   color: var(--color-white);
 }
+.nav-underline { position: absolute; bottom: 8px; height: 2px; background: linear-gradient(90deg, var(--color-light-blue), var(--color-purple)); border-radius: 2px; transition: transform .35s ease, width .35s ease; width: 0; transform: translateX(0); }
+@media (max-width: 900px){ .nav-underline { display:none; } }
 .navbar-tabs-ul li {
   width: fit-content;
   height: 30px;
@@ -674,39 +676,14 @@ noscript {
   width: fit-content;
   display: flex;
   align-items: flex-start;
-  background: -webkit-linear-gradient(
-    135deg,
-    var(--color-light-blue),
-    var(--color-light-purple),
-    var(--color-light-blue),
-    var(--color-light-purple)
-  );
-  background: linear-gradient(
-    -45deg,
-    var(--color-light-blue),
-    var(--color-light-purple),
-    var(--color-light-blue),
-    var(--color-light-purple)
-  );
+  background: linear-gradient(90deg, #e9d5ff, #93c5fd, #a7f3d0);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-size: 400% 400%;
-  -webkit-animation: gradient 3s ease infinite;
-  animation: gradient 3s ease infinite;
+  background-size: 200% 100%;
+  animation: gradient-sweep 8s linear infinite;
 }
-@keyframes gradient {
-  0% {
-    background-position: 0 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0 50%;
-  }
-}
+@keyframes gradient-sweep { 0%{ background-position: 0 0 } 100% { background-position: 200% 0 } }
 
 #work {
   font-size: 8rem;

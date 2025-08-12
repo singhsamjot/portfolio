@@ -155,6 +155,19 @@ window.addEventListener("scroll", () => {
       li.classList.add("activeThistab");
     }
   });
+
+  // Move nav underline
+  const underline = document.getElementById('nav-underline');
+  if (underline) {
+    const active = document.querySelector('.navbar-tabs-ul .activeThistab');
+    if (active) {
+      const rect = active.getBoundingClientRect();
+      const parent = document.querySelector('.navbar-tabs');
+      const prect = parent.getBoundingClientRect();
+      underline.style.width = rect.width + 'px';
+      underline.style.transform = `translateX(${rect.left - prect.left}px)`;
+    }
+  }
 });
 console.log(
   "%c Designed and Developed by Samjot Singh",
