@@ -620,6 +620,16 @@ document.addEventListener('click', (e) => {
   }
 });
 
+// Scroll progress bar
+document.addEventListener('scroll', () => {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const pct = Math.max(0, Math.min(1, scrollTop / docHeight));
+  bar.style.width = `${pct * 100}%`;
+}, { passive: true });
+
 // Reveal progress bars on scroll
 document.addEventListener('DOMContentLoaded', () => {
   const bars = document.querySelectorAll('.bar-fill');
