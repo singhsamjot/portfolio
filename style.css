@@ -1,3 +1,10 @@
+.skill-rings { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 22px; margin: 10px auto 40px; max-width: 1000px; }
+@media (max-width: 980px){ .skill-rings { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.ring-card { display:flex; flex-direction:column; align-items:center; gap:10px; }
+.ring { width: 140px; height: 140px; border-radius: 50%; background: conic-gradient(var(--accent, #a78bfa) 0deg, var(--accent, #a78bfa) 0deg, rgba(255,255,255,0.08) 0deg); display:grid; place-items:center; position: relative; box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+.ring::after { content:''; position:absolute; inset:6px; border-radius:50%; background: rgba(16,16,24,0.8); backdrop-filter: blur(6px); }
+.ring-inner { position: relative; z-index:1; color:#e5e7eb; font-weight:800; font-size: 1.6rem; }
+.ring-label { color:#cbd5e1; font-size: 1.3rem; text-align:center; }
 .highlights-section, .services-section { width: 100%; display:flex; justify-content:center; }
 .highlights-wrap, .services-wrap { width: 60%; }
 @media (max-width: 1100px){ .highlights-wrap, .services-wrap { width: 80%; } }

@@ -570,4 +570,18 @@ document.addEventListener('DOMContentLoaded', () => {
     i.style.transitionDelay = `${Math.min(idx * 60, 300)}ms`;
     io2.observe(i);
   });
+
+  // Animate skill rings
+  const rings = document.querySelectorAll('.ring');
+  const io3 = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        const p = parseFloat(e.target.dataset.p || '0') * 360;
+        e.target.style.setProperty('--accent', getComputedStyle(document.documentElement).getPropertyValue('--color-light-purple') || '#a78bfa');
+        e.target.style.background = `conic-gradient(var(--accent) ${p}deg, rgba(255,255,255,0.08) ${p}deg)`;
+        io3.unobserve(e.target);
+      }
+    })
+  }, { threshold: 0.3 });
+  rings.forEach(r => io3.observe(r));
 });
