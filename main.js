@@ -626,6 +626,29 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }, { threshold: 0.3 });
   rings.forEach(r => io3.observe(r));
+
+  // Blur-in for section content
+  const blurItems = document.querySelectorAll('.blur-reveal');
+  const io4 = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('blur-in');
+        io4.unobserve(e.target);
+      }
+    })
+  }, { threshold: 0.25 });
+  blurItems.forEach(b => io4.observe(b));
+
+  // Scroll parallax for cards
+  const pxCards = document.querySelectorAll('.parallax-card');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY || window.pageYOffset;
+    pxCards.forEach((c, i) => {
+      const speed = 0.05 + (i % 3) * 0.02;
+      const offset = (y - c.offsetTop) * speed;
+      c.style.transform = `translateY(${offset}px)`;
+    })
+  }, { passive: true });
 });
 
 // Skill matrix filtering
